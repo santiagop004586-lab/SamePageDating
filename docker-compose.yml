@@ -1,0 +1,100 @@
+# Local Development Docker Compose
+# Frontend runs natively outside Docker for faster hot reload
+# Usage: docker compose up -d
+
+services:
+  postgres:
+    image: postgis/postgis:15-3.4
+    container_name: deal_finder_postgres
+    environment:
+      POSTGRES_USER: dealfinder
+      POSTGRES_PASSWORD: dealfinder_dev_password
+      POSTGRES_DB: dealfinder
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dealfinder"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: deal_finder_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: deal_finder_backend
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - ./backend:/app
+      - ./data:/data
+      - ./scripts:/scripts
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://dealfinder:dealfinder_dev_password@postgres:5432/dealfinder
+      - REDIS_URL=redis://redis:6379/0
+      - ENVIRONMENT=development
+      - HUD_API_TOKEN=${HUD_API_TOKEN:-}  # Free token from https://www.huduser.gov/hudapi/public/register/form
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  celery_worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: deal_finder_celery
+    command: celery -A app.etl.tasks worker --loglevel=info
+    volumes:
+      - ./backend:/app
+      - ./data:/data
+      - ./scripts:/scripts
+    environment:
+      - DATABASE_URL=postgresql://dealfinder:dealfinder_dev_password@postgres:5432/dealfinder
+      - REDIS_URL=redis://redis:6379/0
+      - ENVIRONMENT=development
+    depends_on:
+      - postgres
+      - redis
+
+  celery_beat:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: deal_finder_celery_beat
+    command: celery -A app.etl.tasks beat --loglevel=info
+    volumes:
+      - ./backend:/app
+      - ./scripts:/scripts
+    environment: 
+      - DATABASE_URL=postgresql://dealfinder:dealfinder_dev_password@postgres:5432/dealfinder
+      - REDIS_URL=redis://redis:6379/0
+      - ENVIRONMENT=development
+    depends_on:
+      - postgres
+      - redis
+
+# Frontend runs natively outside Docker for faster hot reload
+# To start: cd frontend && npm start
+# Access at: http://localhost:3000
+
+volumes:
+  postgres_data:
+  redis_data:

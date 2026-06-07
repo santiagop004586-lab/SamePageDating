@@ -1,0 +1,151 @@
+version: '3.8'
+
+# Production deployment
+# Usage:
+#   docker compose -f docker-compose.prod.yml up -d --build
+#
+# Required environment variables (set in .env.prod or export before running):
+#   POSTGRES_PASSWORD, DATABASE_URL, REDIS_URL, SECRET_KEY, TIN_ENCRYPTION_KEY
+#   REALTOR_API_KEY, MAPBOX_TOKEN, STRIPE_SECRET_KEY, STRIPE_PUBLISHABLE_KEY
+#   STRIPE_WEBHOOK_SECRET, STRIPE_PRICE_ID, SMTP_HOST, SMTP_USER, SMTP_PASSWORD
+#   CORS_ORIGINS, FRONTEND_URL
+
+services:
+  postgres:
+    image: postgis/postgis:15-3.4
+    container_name: deal_finder_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: dealfinder
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: dealfinder
+    # No external port — only accessible within Docker network
+    expose:
+      - "5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dealfinder"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: deal_finder_redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    expose:
+      - "6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: deal_finder_backend
+    restart: unless-stopped
+    # No --reload in production
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 2
+    expose:
+      - "8000"
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
+      - ENVIRONMENT=production
+      - APP_MODE=${APP_MODE}
+      - SECRET_KEY=${SECRET_KEY}
+      - TIN_ENCRYPTION_KEY=${TIN_ENCRYPTION_KEY}
+      - REALTOR_API_KEY=${REALTOR_API_KEY}
+      - MAPBOX_TOKEN=${MAPBOX_TOKEN}
+      - STRIPE_LIVE_SECRET_KEY=${STRIPE_LIVE_SECRET_KEY}
+      - STRIPE_LIVE_PUBLISHABLE_KEY=${STRIPE_LIVE_PUBLISHABLE_KEY}
+      - STRIPE_LIVE_WEBHOOK_SECRET=${STRIPE_LIVE_WEBHOOK_SECRET}
+      - STRIPE_LIVE_PRICE_ID=${STRIPE_LIVE_PRICE_ID}
+      - STRIPE_LIVE_CONNECT_WEBHOOK_SECRET=${STRIPE_LIVE_CONNECT_WEBHOOK_SECRET}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - EMAILS_FROM=${EMAILS_FROM}
+      - EMAILS_FROM_NAME=${EMAILS_FROM_NAME}
+      - CORS_ORIGINS=${CORS_ORIGINS}
+      - FRONTEND_URL=${FRONTEND_URL}
+    volumes:
+      - /root/sec_8_deal_finder/data:/data:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  celery_worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: deal_finder_celery
+    restart: unless-stopped
+    command: celery -A app.etl.tasks worker --loglevel=info --concurrency=2
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
+      - ENVIRONMENT=production
+      - APP_MODE=${APP_MODE}
+      - SECRET_KEY=${SECRET_KEY}
+      - REALTOR_API_KEY=${REALTOR_API_KEY}
+      - MAPBOX_TOKEN=${MAPBOX_TOKEN}
+    depends_on:
+      - postgres
+      - redis
+
+  celery_beat:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: deal_finder_celery_beat
+    restart: unless-stopped
+    command: celery -A app.etl.tasks beat --loglevel=info
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
+      - ENVIRONMENT=production
+      - APP_MODE=${APP_MODE}
+      - SECRET_KEY=${SECRET_KEY}
+      - REALTOR_API_KEY=${REALTOR_API_KEY}
+    depends_on:
+      - postgres
+      - redis
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+      args:
+        # API calls go to same domain via nginx proxy at /api
+        REACT_APP_API_URL: ""
+        REACT_APP_MAPBOX_TOKEN: ${MAPBOX_TOKEN}
+        REACT_APP_GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+    container_name: deal_finder_frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      # Mount nginx config from host so we can update it without rebuilding the image
+      - /root/sec_8_deal_finder/frontend/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      # Mount SSL certs (obtained via certbot on the host)
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - /var/www/certbot:/var/www/certbot:ro
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
+  redis_data:
