@@ -126,3 +126,35 @@ def send_subscription_cancellation_email(to_email: str, access_end_date: str) ->
     </div>
     """
     return _send(to_email, "Your Find Best Rentals Subscription Has Been Cancelled", html)
+
+
+def send_invite_email(to_email: str, invite_code: str) -> bool:
+    """Send an invite code to a waitlist user."""
+    signup_url = f"{settings.FRONTEND_URL}/signup?code={invite_code}"
+    html = f"""
+    <div style="font-family:sans-serif;max-width:520px;margin:auto">
+      <h2 style="color:#1d4ed8">🎉 You're Invited to SamePageDating!</h2>
+      <p>Great news! You've been selected from our waitlist to join <strong>SamePageDating</strong>.</p>
+      
+      <div style="background:#e0f2fe;border-left:4px solid #1d4ed8;padding:16px;margin:20px 0">
+        <p style="margin:0;font-weight:bold;color:#1f2937">Your Exclusive Invite Code:</p>
+        <p style="margin:12px 0;font-size:18px;font-family:monospace;color:#1d4ed8;font-weight:bold;letter-spacing:1px">{invite_code}</p>
+      </div>
+
+      <p><strong>What makes SamePageDating different?</strong></p>
+      <ul style="color:#4b5563;line-height:1.8">
+        <li>See compatibility scores <em>before</em> you match</li>
+        <li>Deep questionnaire covering values, lifestyle, and relationship goals</li>
+        <li>Connect with people who truly want the same things you do</li>
+        <li>No more endless swiping on incompatible profiles</li>
+      </ul>
+
+      <a href="{signup_url}" style="display:inline-block;padding:12px 24px;background:#1d4ed8;color:white;border-radius:6px;text-decoration:none;font-weight:bold;margin:16px 0">
+        Sign Up Now
+      </a>
+
+      <p style="color:#6b7280;font-size:13px;margin-top:24px">This invite code is personal to you. Don't share it with others.</p>
+      <p style="color:#6b7280;font-size:13px">Questions? Reply to this email - we're here to help!</p>
+    </div>
+    """
+    return _send(to_email, "Your SamePageDating Invite Code is Here! 🎉", html)

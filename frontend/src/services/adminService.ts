@@ -186,6 +186,13 @@ export async function createInvites(
   return data;
 }
 
+export async function sendInviteEmail(email: string, inviteCode: string): Promise<void> {
+  await api.post('/api/v1/admin/invites/send', {
+    email,
+    invite_code: inviteCode,
+  });
+}
+
 export async function revokeInvite(id: number): Promise<void> {
   await api.delete(`/api/v1/admin/invites/${id}`);
 }

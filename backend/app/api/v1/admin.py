@@ -694,6 +694,34 @@ def create_invites(
 
 
 # ---------------------------------------------------------------------------
+# POST /admin/invites/send
+# Send an invite code via email
+# ---------------------------------------------------------------------------
+class SendInviteRequest(BaseModel):
+    email: str
+    invite_code: str
+
+
+@router.post("/invites/send", status_code=status.HTTP_200_OK)
+def send_invite_email_endpoint(
+    body: SendInviteRequest,
+    _: User = Depends(get_admin_user),
+):
+    """Send an invite code to a user via email."""
+    from app.core.email import send_invite_email
+    
+    success = send_invite_email(body.email, body.invite_code)
+    
+    if not success:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to send invite email"
+        )
+    
+    return {"message": "Invite email sent successfully"}
+
+
+# ---------------------------------------------------------------------------
 # DELETE /admin/invites/{invite_id}
 # Revoke (hard-delete) an unused invite
 # ---------------------------------------------------------------------------

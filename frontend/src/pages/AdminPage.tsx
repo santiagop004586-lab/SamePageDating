@@ -14,6 +14,7 @@ import {
   deleteWaitlistEntry,
   listInvites,
   createInvites,
+  sendInviteEmail,
   revokeInvite,
   listBetaUsers,
   revokeBetaAccess,
@@ -220,9 +221,16 @@ export default function AdminPage() {
     setBetaMsg('');
     try {
       const links = await createInvites(email, 1, inviteDays ? Number(inviteDays) : null);
+      if (links.length > 0) {
+        // Send the invite code via email
+        await sendInviteEmail(email, links[0].invite_code);
+        setBetaMsg(`✅ Invite sent to ${email}`);
+      }
       setNewLinks(links);
       await loadBeta();
-    } catch { setBetaMsg('Failed to create invite.'); }
+    } catch (err: any) { 
+      setBetaMsg(err?.response?.data?.detail || 'Failed to send invite.'); 
+    }
     finally { setInviteCreating(false); }
   }
 
