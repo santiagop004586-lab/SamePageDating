@@ -41,8 +41,8 @@ export default function SubscribePage() {
         <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
           {/* Top banner */}
           <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-6 text-white text-center">
-            <div className="text-4xl mb-2">🏘️</div>
-            <h1 className="text-2xl font-extrabold mb-1">FindBestRentals</h1>
+            <div className="text-4xl mb-2">💕</div>
+            <h1 className="text-2xl font-extrabold mb-1">SamePageDating</h1>
             <p className="text-blue-200 text-sm">Start your 30-day free trial today</p>
           </div>
 

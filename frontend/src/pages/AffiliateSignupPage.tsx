@@ -66,8 +66,8 @@ export default function AffiliateSignupPage() {
         {/* Header */}
         <div className="text-center mb-8">
           <button onClick={() => navigate('/affiliates')} className="flex items-center gap-2 mx-auto mb-4 text-green-700 hover:text-green-800 transition-colors">
-            <span className="text-3xl">🏘️</span>
-            <span className="font-bold text-lg">FindBestRentals</span>
+            <span className="text-3xl">💕</span>
+            <span className="font-bold text-lg">SamePageDating</span>
           </button>
           <h1 className="text-2xl font-bold text-gray-900">Create your affiliate account</h1>
           <p className="text-gray-500 mt-1 text-sm">Free to join · No approval needed · Earn 30% recurring</p>

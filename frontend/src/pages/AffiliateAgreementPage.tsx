@@ -12,8 +12,8 @@ export default function AffiliateAgreementPage() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">1. Agreement to Terms</h2>
             <p className="text-gray-700 leading-relaxed">
-              This Affiliate Program Agreement ("Agreement") is entered into between you ("Affiliate") and FindBestRentals ("Company"). 
-              By enrolling in the FindBestRentals Affiliate Program, you agree to be bound by this Agreement and our{' '}
+              This Affiliate Program Agreement ("Agreement") is entered into between you ("Affiliate") and SamePageDating ("Company"). 
+              By enrolling in the SamePageDating Affiliate Program, you agree to be bound by this Agreement and our{' '}
               <Link to="/terms-of-service" className="text-blue-600 hover:underline">Terms of Service</Link>.
             </p>
           </section>
@@ -21,7 +21,7 @@ export default function AffiliateAgreementPage() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">2. Program Overview</h2>
             <p className="text-gray-700 leading-relaxed">
-              The FindBestRentals Affiliate Program allows you to earn recurring commissions by referring new subscribers to our Service. 
+              The SamePageDating Affiliate Program allows you to earn recurring commissions by referring new subscribers to our Service. 
               You will receive a unique referral link and code to share with potential customers.
             </p>
             
@@ -145,7 +145,7 @@ export default function AffiliateAgreementPage() {
             <h3 className="text-xl font-semibold text-gray-800 mt-6 mb-3">5.2 W-9 Collection (U.S. Affiliates)</h3>
             <p className="text-gray-700 leading-relaxed">
               If you are a U.S. person or entity, you must provide your Tax Identification Number (TIN) or Social Security Number (SSN) 
-              to Stripe during onboarding. This information is stored securely by Stripe, not by FindBestRentals.
+              to Stripe during onboarding. This information is stored securely by Stripe, not by SamePageDating.
             </p>
 
             <h3 className="text-xl font-semibold text-gray-800 mt-6 mb-3">5.3 International Affiliates</h3>
@@ -171,7 +171,7 @@ export default function AffiliateAgreementPage() {
               <li><strong>Fake Accounts:</strong> Creating fake user accounts or using bots</li>
               <li><strong>Credit Card Fraud:</strong> Using stolen or invalid payment methods</li>
               <li><strong>Cookie Stuffing:</strong> Forcing referral cookies onto users' browsers without their knowledge</li>
-              <li><strong>Trademark Bidding:</strong> Bidding on "FindBestRentals" or related trademarks in paid search ads</li>
+              <li><strong>Trademark Bidding:</strong> Bidding on "SamePageDating" or related trademarks in paid search ads</li>
               <li><strong>Spam:</strong> Sending unsolicited emails or messages promoting your referral link</li>
               <li><strong>False Advertising:</strong> Making misleading claims about the Service or commission rates</li>
               <li><strong>Incentivized Signups:</strong> Offering cash or rewards in exchange for signups (unless pre-approved)</li>
@@ -193,7 +193,7 @@ export default function AffiliateAgreementPage() {
 
             <h3 className="text-xl font-semibold text-gray-800 mt-6 mb-3">7.2 Required Disclosures</h3>
             <p className="text-gray-700 leading-relaxed">
-              You must disclose your affiliate relationship when promoting FindBestRentals. Example disclosure:
+              You must disclose your affiliate relationship when promoting SamePageDating. Example disclosure:
             </p>
             <div className="bg-gray-100 border border-gray-300 rounded p-4 mt-2">
               <p className="text-sm text-gray-700 italic">
@@ -206,7 +206,7 @@ export default function AffiliateAgreementPage() {
 
             <h3 className="text-xl font-semibold text-gray-800 mt-6 mb-3">7.3 Brand Usage</h3>
             <p className="text-gray-700 leading-relaxed">
-              You may use the "FindBestRentals" name and logo in your promotional materials, provided:
+              You may use the "SamePageDating" name and logo in your promotional materials, provided:
             </p>
             <ul className="list-disc pl-6 text-gray-700 space-y-2 mt-2">
               <li>You do not imply official partnership or endorsement</li>
@@ -275,7 +275,7 @@ export default function AffiliateAgreementPage() {
               This Agreement does not create an employment, partnership, joint venture, or agency relationship. You are an independent contractor.
             </p>
             <p className="text-gray-700 leading-relaxed mt-4">
-              You have no authority to make any commitments on behalf of FindBestRentals. You are solely responsible for your own taxes, 
+              You have no authority to make any commitments on behalf of SamePageDating. You are solely responsible for your own taxes, 
               insurance, and business expenses.
             </p>
           </section>
@@ -283,7 +283,7 @@ export default function AffiliateAgreementPage() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">11. Limitation of Liability</h2>
             <p className="text-gray-700 leading-relaxed">
-              FindBestRentals shall not be liable for any indirect, incidental, or consequential damages arising from your participation 
+              SamePageDating shall not be liable for any indirect, incidental, or consequential damages arising from your participation 
               in the Affiliate Program, including but not limited to lost commissions, lost referrals, or platform downtime.
             </p>
             <p className="text-gray-700 leading-relaxed mt-4">
@@ -313,14 +313,14 @@ export default function AffiliateAgreementPage() {
               Questions about the Affiliate Program? Contact us:
             </p>
             <p className="text-gray-700 mt-4">
-              <strong>Email:</strong> affiliates@findbestrentals.com<br />
+              <strong>Email:</strong> affiliates@samepagedating.com<br />
               <strong>Support:</strong> Dashboard → Settings → Help
             </p>
           </section>
 
           <div className="mt-12 pt-8 border-t border-gray-200 bg-blue-50 -mx-8 -mb-8 px-8 py-6 rounded-b-lg">
             <p className="text-sm font-semibold text-gray-800 mb-2">
-              By enrolling in the FindBestRentals Affiliate Program, you acknowledge that you have read, understood, and agree to be bound by this Agreement.
+              By enrolling in the SamePageDating Affiliate Program, you acknowledge that you have read, understood, and agree to be bound by this Agreement.
             </p>
             <p className="text-sm text-gray-600">
               This Agreement is effective as of the date you enroll in the Affiliate Program and remains in effect until terminated by either party.

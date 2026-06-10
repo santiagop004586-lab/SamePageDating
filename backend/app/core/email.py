@@ -38,7 +38,7 @@ def send_verification_email(to_email: str, token: str) -> bool:
     html = f"""
     <div style="font-family:sans-serif;max-width:520px;margin:auto">
       <h2 style="color:#1d4ed8">Verify your email</h2>
-      <p>Thanks for signing up for <strong>Find Best Rentals</strong>!</p>
+      <p>Thanks for signing up for <strong>SamePageDating</strong>!</p>
       <p>Click the button below to verify your email address. This link expires in 24 hours.</p>
       <a href="{url}" style="display:inline-block;padding:12px 24px;background:#1d4ed8;color:white;border-radius:6px;text-decoration:none;font-weight:bold;margin:16px 0">
         Verify Email
@@ -46,7 +46,7 @@ def send_verification_email(to_email: str, token: str) -> bool:
       <p style="color:#6b7280;font-size:13px">Or paste this link: {url}</p>
     </div>
     """
-    return _send(to_email, "Verify your Find Best Rentals account", html)
+    return _send(to_email, "Verify your SamePageDating account", html)
 
 
 def send_password_reset_email(to_email: str, token: str) -> bool:
@@ -54,7 +54,7 @@ def send_password_reset_email(to_email: str, token: str) -> bool:
     html = f"""
     <div style="font-family:sans-serif;max-width:520px;margin:auto">
       <h2 style="color:#1d4ed8">Reset your password</h2>
-      <p>We received a request to reset the password for your <strong>Find Best Rentals</strong> account.</p>
+      <p>We received a request to reset the password for your <strong>SamePageDating</strong> account.</p>
       <p>Click below to set a new password. This link expires in 2 hours.</p>
       <a href="{url}" style="display:inline-block;padding:12px 24px;background:#1d4ed8;color:white;border-radius:6px;text-decoration:none;font-weight:bold;margin:16px 0">
         Reset Password
@@ -62,7 +62,7 @@ def send_password_reset_email(to_email: str, token: str) -> bool:
       <p style="color:#6b7280;font-size:13px">If you didn't request this, you can safely ignore this email.</p>
     </div>
     """
-    return _send(to_email, "Reset your Find Best Rentals password", html)
+    return _send(to_email, "Reset your SamePageDating password", html)
 
 
 def send_subscription_welcome_email(to_email: str, trial_end_date: str) -> bool:
@@ -70,7 +70,7 @@ def send_subscription_welcome_email(to_email: str, trial_end_date: str) -> bool:
     dashboard_url = f"{settings.FRONTEND_URL}/dashboard"
     html = f"""
     <div style="font-family:sans-serif;max-width:520px;margin:auto">
-      <h2 style="color:#1d4ed8">🎉 Welcome to Find Best Rentals!</h2>
+      <h2 style="color:#1d4ed8">🎉 Welcome to SamePageDating!</h2>
       <p>Thanks for subscribing! Your <strong>30-day free trial</strong> has started.</p>
       
       <div style="background:#f3f4f6;border-left:4px solid #1d4ed8;padding:16px;margin:20px 0">
@@ -82,21 +82,21 @@ def send_subscription_welcome_email(to_email: str, trial_end_date: str) -> bool:
 
       <p><strong>What you get:</strong></p>
       <ul style="color:#4b5563;line-height:1.8">
-        <li>Access to exclusive Section 8 deals nationwide</li>
-        <li>Automated property analysis & valuation</li>
-        <li>Real-time FMR and rent estimates</li>
-        <li>Comprehensive rehab cost calculations</li>
+        <li>Complete the compatibility questionnaire</li>
+        <li>See compatibility scores before matching</li>
+        <li>Connect with people who share your values</li>
+        <li>Quality matches based on deep compatibility</li>
       </ul>
 
       <a href="{dashboard_url}" style="display:inline-block;padding:12px 24px;background:#1d4ed8;color:white;border-radius:6px;text-decoration:none;font-weight:bold;margin:16px 0">
-        View Properties Now
+        Get Started Now
       </a>
 
       <p style="color:#6b7280;font-size:13px;margin-top:24px">Questions? Reply to this email or visit our FAQ section.</p>
       <p style="color:#6b7280;font-size:13px">You can manage your subscription at any time from your account settings.</p>
     </div>
     """
-    return _send(to_email, "Welcome to Find Best Rentals - Your Free Trial Has Started!", html)
+    return _send(to_email, "Welcome to SamePageDating - Your Free Trial Has Started!", html)
 
 
 def send_subscription_cancellation_email(to_email: str, access_end_date: str) -> bool:

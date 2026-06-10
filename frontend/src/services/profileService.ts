@@ -76,36 +76,36 @@ export interface PhotoUploadData {
 
 const profileService = {
   createProfile: async (data: CreateProfileData): Promise<Profile> => {
-    const response = await api.post('/profile/', data);
+    const response = await api.post('/api/v1/profile/', data);
     return response.data;
   },
 
   getMyProfile: async (): Promise<Profile> => {
-    const response = await api.get('/profile/me');
+    const response = await api.get('/api/v1/profile/me');
     return response.data;
   },
 
   getProfile: async (profileId: number): Promise<Profile> => {
-    const response = await api.get(`/profile/${profileId}`);
+    const response = await api.get(`/api/v1/profile/${profileId}`);
     return response.data;
   },
 
   updateProfile: async (data: UpdateProfileData): Promise<Profile> => {
-    const response = await api.patch('/profile/me', data);
+    const response = await api.patch('/api/v1/profile/me', data);
     return response.data;
   },
 
   addPhoto: async (data: PhotoUploadData): Promise<Photo> => {
-    const response = await api.post('/profile/me/photos', data);
+    const response = await api.post('/api/v1/profile/me/photos', data);
     return response.data;
   },
 
   deletePhoto: async (photoId: number): Promise<void> => {
-    await api.delete(`/profile/me/photos/${photoId}`);
+    await api.delete(`/api/v1/profile/me/photos/${photoId}`);
   },
 
   getMyPhotos: async (): Promise<Photo[]> => {
-    const response = await api.get('/profile/me/photos');
+    const response = await api.get('/api/v1/profile/me/photos');
     return response.data;
   },
 };

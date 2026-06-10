@@ -7,13 +7,15 @@ import enum
 
 class QuestionCategory(str, enum.Enum):
     """Categories for compatibility questions"""
+    RELATIONSHIP_BOUNDARIES = "relationship_boundaries"
+    INTIMACY = "intimacy"
     LIFESTYLE = "lifestyle"
-    VALUES = "values"
-    GOALS = "goals"
-    PERSONALITY = "personality"
-    RELATIONSHIPS = "relationships"
-    INTERESTS = "interests"
-    DEALBREAKERS = "dealbreakers"
+    MONEY_CAREER = "money_career"
+    FAMILY = "family"
+    DATING_GOALS = "dating_goals"
+    RELIGION = "religion"
+    POLITICS = "politics"
+    COMMUNICATION = "communication"
 
 
 class QuestionType(str, enum.Enum):
@@ -32,8 +34,8 @@ class CompatibilityQuestion(Base):
     
     # Question content
     question_text = Column(Text, nullable=False)
-    category = Column(SQLEnum(QuestionCategory), nullable=False, index=True)
-    question_type = Column(SQLEnum(QuestionType), nullable=False)
+    category = Column(String(50), nullable=False, index=True)  # Store as string, not enum
+    question_type = Column(String(20), nullable=False)  # Store as string, not enum
     
     # For multiple choice questions
     options = Column(Text, nullable=True)  # JSON array of options ["option1", "option2", ...]

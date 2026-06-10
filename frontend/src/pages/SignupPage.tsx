@@ -5,7 +5,7 @@ import api from '../services/api';
 
 export default function SignupPage() {
   const { register, appMode } = useAuth();
-  const requiresAccessCode = appMode !== 'production';
+  const requiresAccessCode = appMode === 'waitlist' || appMode === 'active_beta';
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
@@ -25,6 +25,13 @@ export default function SignupPage() {
   );
   const [inviteChecking, setInviteChecking] = useState(false);
   const [inviteError, setInviteError] = useState('');
+
+  // Update inviteChecked when appMode changes (e.g., when config loads)
+  useEffect(() => {
+    if (!requiresAccessCode) {
+      setInviteChecked(true);
+    }
+  }, [requiresAccessCode]);
 
   // Capture referral code from URL param and persist in localStorage
   useEffect(() => {
@@ -115,12 +122,13 @@ export default function SignupPage() {
   }
 
   // ── Invite code entry screen ───────────────────────────────────────────────
-  if (!inviteChecked) {
+  // Only show invite screen if we're in waitlist mode AND haven't validated an invite
+  if (!inviteChecked && requiresAccessCode) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
         <div className="w-full max-w-md">
           <div className="text-center mb-8">
-            <span className="text-5xl">🏘️</span>
+            <span className="text-5xl">💕</span>
             <h1 className="text-2xl font-bold text-gray-900 mt-3">Enter your invite code</h1>
             <p className="text-gray-500 mt-1">
               This app is in private beta. Check your email for an invite code.
@@ -186,7 +194,7 @@ export default function SignupPage() {
             Click the link to activate your account.
           </p>
           <p className="text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-4 py-2 text-xs mb-6">
-            ⚠️ Don't see it? Check your <strong>spam or junk folder</strong>. The email comes from <span className="font-mono">noreply@send.findbestrentals.com</span>
+            ⚠️ Don't see it? Check your <strong>spam or junk folder</strong>. The email comes from <span className="font-mono">noreply@samepagedating.com</span>
           </p>
           <button
             onClick={() => navigate('/login')}
@@ -203,9 +211,13 @@ export default function SignupPage() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <span className="text-5xl">🏘️</span>
+          <span className="text-5xl">💕</span>
           <h1 className="text-2xl font-bold text-gray-900 mt-3">Create your account</h1>
-          <p className="text-gray-500 mt-1">30-day free trial · $19.99/month after · Cancel anytime</p>
+          <p className="text-gray-500 mt-1">
+            {appMode === 'production' 
+              ? 'Start finding your perfect match today' 
+              : 'Join the beta and help us build the future of dating'}
+          </p>
         </div>
 
         <div className="bg-white rounded-2xl shadow-lg p-8">

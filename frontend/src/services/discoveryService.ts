@@ -41,19 +41,19 @@ export interface Swipe {
 
 const discoveryService = {
   getDiscoveryFeed: async (limit: number = 10, offset: number = 0): Promise<DiscoveryProfile[]> => {
-    const response = await api.get('/discovery/feed', {
+    const response = await api.get('/api/v1/discovery/feed', {
       params: { limit, offset },
     });
     return response.data;
   },
 
   swipe: async (action: SwipeAction): Promise<MatchNotification> => {
-    const response = await api.post('/discovery/swipe', action);
+    const response = await api.post('/api/v1/discovery/swipe', action);
     return response.data;
   },
 
   getSwipeHistory: async (action?: string, limit: number = 50): Promise<Swipe[]> => {
-    const response = await api.get('/discovery/swipes/history', {
+    const response = await api.get('/api/v1/discovery/swipes/history', {
       params: { action, limit },
     });
     return response.data;

@@ -27,10 +27,12 @@ def create_profile(
     current_user: User = Depends(get_current_user)
 ):
     """Create a new dating profile"""
+    logger.info(f"Creating profile for user {current_user.id}: {profile_data.model_dump()}")
     try:
         profile = ProfileService.create_profile(db, current_user.id, profile_data)
         return profile
     except ValueError as e:
+        logger.error(f"Profile creation failed for user {current_user.id}: {str(e)}")
         raise HTTPException(status_code=400, detail=str(e))
 
 

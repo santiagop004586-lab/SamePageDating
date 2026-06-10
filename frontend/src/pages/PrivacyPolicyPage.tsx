@@ -12,11 +12,11 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">1. Introduction</h2>
             <p className="text-gray-700 leading-relaxed">
-              FindBestRentals ("we," "our," or "us") respects your privacy and is committed to protecting your personal information. 
+              SamePageDating ("we," "our," or "us") respects your privacy and is committed to protecting your personal information. 
               This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our Service.
             </p>
             <p className="text-gray-700 leading-relaxed mt-4">
-              By using FindBestRentals, you consent to the data practices described in this policy.
+              By using SamePageDating, you consent to the data practices described in this policy.
             </p>
           </section>
 
@@ -243,8 +243,8 @@ export default function PrivacyPolicyPage() {
               If you have questions about this Privacy Policy or wish to exercise your privacy rights, please contact us:
             </p>
             <p className="text-gray-700 mt-4">
-              <strong>Email:</strong> privacy@findbestrentals.com<br />
-              <strong>Website:</strong> <a href="https://findbestrentals.com" className="text-blue-600 hover:underline">findbestrentals.com</a>
+              <strong>Email:</strong> privacy@samepagedating.com<br />
+              <strong>Website:</strong> <a href="https://samepagedating.com" className="text-blue-600 hover:underline">samepagedating.com</a>
             </p>
             <p className="text-gray-700 leading-relaxed mt-4">
               We will respond to your request within 30 days.

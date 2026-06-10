@@ -46,8 +46,8 @@ export default function AffiliateLandingPage() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur border-b border-gray-100 shadow-sm">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <button onClick={() => navigate('/')} className="flex items-center gap-2">
-            <span className="text-2xl">🏘️</span>
-            <span className="font-bold text-gray-900 text-lg">FindBestRentals</span>
+            <span className="text-2xl">💕</span>
+            <span className="font-bold text-gray-900 text-lg">SamePageDating</span>
           </button>
           <div className="flex items-center gap-3">
             <button
@@ -78,7 +78,7 @@ export default function AffiliateLandingPage() {
             Every Month
           </h1>
           <p className="text-xl text-green-100 mb-10 max-w-xl mx-auto">
-            Refer investors to FindBestRentals and earn 30% of their subscription every month they stay subscribed.
+            Refer users to SamePageDating and earn 30% of their subscription every month they stay subscribed.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
@@ -197,7 +197,7 @@ export default function AffiliateLandingPage() {
 
       {/* Footer */}
       <footer className="border-t border-gray-100 py-8 px-6 text-center text-gray-400 text-sm">
-        © {new Date().getFullYear()} FindBestRentals ·{' '}
+        © {new Date().getFullYear()} SamePageDating ·{' '}
         <button onClick={() => navigate('/')} className="hover:text-gray-600 transition-colors">Home</button>
         {' '}·{' '}
         <button onClick={() => navigate('/affiliate-signup')} className="hover:text-gray-600 transition-colors">Join Affiliate</button>

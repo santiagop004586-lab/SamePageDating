@@ -8,7 +8,6 @@ type Step = 'credentials' | '2fa';
 
 export default function LoginPage() {
   const { login, loginWithGoogle, finalizeLogin, appMode } = useAuth();
-  const isWaitlistOrBeta = appMode !== 'production';
   const navigate = useNavigate();
   const location = useLocation();
   const from = (location.state as any)?.from?.pathname || '/app';
@@ -81,30 +80,17 @@ export default function LoginPage() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <span className="text-5xl">🏘️</span>
+          <span className="text-5xl">💕</span>
           <div className="flex items-center justify-center gap-2 mt-3">
             <h1 className="text-2xl font-bold text-gray-900">Welcome back</h1>
-            {isWaitlistOrBeta && (
-              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-700 border border-amber-300 uppercase tracking-wide">
+            {appMode === 'active_beta' && (
+              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-blue-100 text-blue-700 border border-blue-300 uppercase tracking-wide">
                 Beta
               </span>
             )}
           </div>
-          <p className="text-gray-500 mt-1">Log in to your FindBestRentals account</p>
+          <p className="text-gray-500 mt-1">Log in to your SamePageDating account</p>
         </div>
-
-        {isWaitlistOrBeta && (
-          <div className="mb-4 p-4 bg-amber-50 border border-amber-200 rounded-xl text-sm text-amber-800">
-            <p className="font-semibold mb-1">🚀 This app is currently in private beta.</p>
-            <p>
-              Access is currently controlled by app mode. If you don't have an account yet,{' '}
-              <Link to="/waitlist" className="font-semibold underline hover:text-amber-900">
-                join the waitlist
-              </Link>{' '}
-              to request access.
-            </p>
-          </div>
-        )}
 
         <div className="bg-white rounded-2xl shadow-lg p-8">
           {error && (
@@ -225,7 +211,7 @@ export default function LoginPage() {
         </div>
 
         <p className="text-center text-sm text-gray-600 mt-6">
-          {isWaitlistOrBeta ? (
+          {appMode === 'waitlist' ? (
             <>
               Want access?{' '}
               <Link to="/waitlist" className="text-blue-600 font-semibold hover:underline">
@@ -236,7 +222,7 @@ export default function LoginPage() {
             <>
               Don't have an account?{' '}
               <Link to="/signup" className="text-blue-600 font-semibold hover:underline">
-                Sign up free
+                Sign up {appMode === 'production' ? 'free' : ''}
               </Link>
             </>
           )}

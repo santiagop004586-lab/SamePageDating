@@ -40,26 +40,26 @@ export interface ModerationStats {
 
 const moderationService = {
   createAction: async (data: ModerationActionCreate): Promise<ModerationAction> => {
-    const response = await api.post('/moderation/actions', data);
+    const response = await api.post('/api/v1/moderation/actions', data);
     return response.data;
   },
 
   getFlaggedContent: async (contentType?: string): Promise<any[]> => {
-    const response = await api.get('/moderation/flagged', {
+    const response = await api.get('/api/v1/moderation/flagged', {
       params: { content_type: contentType },
     });
     return response.data;
   },
 
   getPendingPhotos: async (limit: number = 50): Promise<Photo[]> => {
-    const response = await api.get('/moderation/pending-photos', {
+    const response = await api.get('/api/v1/moderation/pending-photos', {
       params: { limit },
     });
     return response.data;
   },
 
   getStats: async (): Promise<ModerationStats> => {
-    const response = await api.get('/moderation/stats');
+    const response = await api.get('/api/v1/moderation/stats');
     return response.data;
   },
 
@@ -68,18 +68,18 @@ const moderationService = {
     targetUserId?: number,
     limit: number = 50
   ): Promise<ModerationAction[]> => {
-    const response = await api.get('/moderation/actions/history', {
+    const response = await api.get('/api/v1/moderation/actions/history', {
       params: { moderator_id: moderatorId, target_user_id: targetUserId, limit },
     });
     return response.data;
   },
 
   approvePhoto: async (photoId: number): Promise<void> => {
-    await api.post(`/moderation/photos/${photoId}/approve`);
+    await api.post(`/api/v1/moderation/photos/${photoId}/approve`);
   },
 
   flagPhoto: async (photoId: number, reason: string): Promise<void> => {
-    await api.post(`/moderation/photos/${photoId}/flag`, { reason });
+    await api.post(`/api/v1/moderation/photos/${photoId}/flag`, { reason });
   },
 };
 

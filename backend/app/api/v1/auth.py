@@ -51,13 +51,19 @@ def register(request: Request, body: UserRegister, db: Session = Depends(get_db)
     
     # ── Invite gate ────────────────────────────────────────────────────────
     invite = None
-    if settings.APP_MODE in ("waitlist", "active_beta"):
+    if settings.APP_MODE == "waitlist":
+        # In waitlist mode, invite token is required
         if not body.invite_token:
             raise HTTPException(
                 status_code=status.HTTP_403_FORBIDDEN,
                 detail="Signup is currently in waitlist access mode. Join the waitlist at /waitlist.",
             )
         invite = invite_service.validate_invite(db, body.invite_token)
+    elif settings.APP_MODE == "active_beta" and body.invite_token:
+        # In active_beta, invite is optional - validate if provided
+        invite = invite_service.validate_invite(db, body.invite_token)
+    # In production mode, no invite needed at all
+    
     # ── Normal signup ──────────────────────────────────────────────────────
     user = auth_service.register_user(
         db, email=body.email, password=body.password, full_name=body.full_name,
@@ -68,11 +74,13 @@ def register(request: Request, body: UserRegister, db: Session = Depends(get_db)
     # ── Post-signup: consume invite, conditionally grant beta access ───────
     if invite:
         invite_service.mark_invite_used(db, invite)
-        # Only grant beta_user in active_beta mode (free access without subscription)
-        if settings.APP_MODE == "active_beta":
-            user.beta_user = True
+    
+    # Grant beta_user status in active_beta mode (free access without subscription)
+    if settings.APP_MODE == "active_beta":
+        user.beta_user = True
         db.commit()
         db.refresh(user)
+    
     return user
 
 

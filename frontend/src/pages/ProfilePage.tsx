@@ -194,12 +194,13 @@ const ProfilePage: React.FC = () => {
           </div>
 
           <div>
-            <label className="block font-medium mb-1">Looking for</label>
+            <label className="block font-medium mb-1">Looking for *</label>
             <input
               type="text"
               value={formData.looking_for_gender}
               onChange={(e) => setFormData({ ...formData, looking_for_gender: e.target.value })}
               placeholder="e.g., male, female, or both"
+              required
               className="w-full border px-3 py-2 rounded"
             />
           </div>

@@ -4,7 +4,7 @@ from app.models.affiliate import Affiliate
 from app.models.invite import Invite
 from app.models.refresh_token import RefreshToken
 from app.models.feedback import Feedback
-from app.models.waitlist import Waitlist
+from app.models.waitlist import WaitlistUser
 
 # Dating-specific models
 from app.models.profile import Profile
@@ -22,7 +22,7 @@ __all__ = [
     "Invite",
     "RefreshToken",
     "Feedback",
-    "Waitlist",
+    "WaitlistUser",
     "Profile",
     "CompatibilityQuestion",
     "QuestionCategory",

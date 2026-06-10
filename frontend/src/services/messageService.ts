@@ -38,12 +38,12 @@ export interface Conversation {
 
 const messageService = {
   sendMessage: async (data: MessageCreate): Promise<Message> => {
-    const response = await api.post('/messages/', data);
+    const response = await api.post('/api/v1/messages/', data);
     return response.data;
   },
 
   getConversations: async (): Promise<Conversation[]> => {
-    const response = await api.get('/messages/conversations');
+    const response = await api.get('/api/v1/messages/conversations');
     return response.data;
   },
 
@@ -52,27 +52,27 @@ const messageService = {
     page: number = 1,
     pageSize: number = 50
   ): Promise<MessageListResponse> => {
-    const response = await api.get(`/messages/match/${matchId}`, {
+    const response = await api.get(`/api/v1/messages/match/${matchId}`, {
       params: { page, page_size: pageSize },
     });
     return response.data;
   },
 
   markRead: async (messageIds: number[]): Promise<void> => {
-    await api.post('/messages/read', { message_ids: messageIds });
+    await api.post('/api/v1/messages/read', { message_ids: messageIds });
   },
 
   getUnreadCount: async (matchId: number): Promise<number> => {
-    const response = await api.get(`/messages/match/${matchId}/unread-count`);
+    const response = await api.get(`/api/v1/messages/match/${matchId}/unread-count`);
     return response.data.unread_count;
   },
 
   deleteMessage: async (messageId: number): Promise<void> => {
-    await api.delete(`/messages/${messageId}`);
+    await api.delete(`/api/v1/messages/${messageId}`);
   },
 
   flagMessage: async (messageId: number): Promise<void> => {
-    await api.post(`/messages/${messageId}/flag`);
+    await api.post(`/api/v1/messages/${messageId}/flag`);
   },
 };
 

@@ -144,8 +144,8 @@ export default function AffiliateDashboardPage() {
       <nav className="bg-white border-b border-gray-100 shadow-sm">
         <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
           <button onClick={() => navigate('/affiliates')} className="flex items-center gap-2 text-gray-900 hover:text-green-700 transition-colors">
-            <span className="text-2xl">🏨️</span>
-            <span className="font-bold text-base">FindBestRentals</span>
+            <span className="text-2xl">💕</span>
+            <span className="font-bold text-base">SamePageDating</span>
             <span className="ml-2 text-xs bg-green-100 text-green-700 font-semibold px-2 py-0.5 rounded-full">Affiliate</span>
           </button>
           <div className="flex items-center gap-3">

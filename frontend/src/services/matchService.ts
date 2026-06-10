@@ -32,23 +32,23 @@ export interface MatchStats {
 
 const matchService = {
   getMatches: async (page: number = 1, pageSize: number = 20): Promise<MatchListResponse> => {
-    const response = await api.get('/matches/', {
+    const response = await api.get('/api/v1/matches/', {
       params: { page, page_size: pageSize },
     });
     return response.data;
   },
 
   getMatch: async (matchId: number): Promise<Match> => {
-    const response = await api.get(`/matches/${matchId}`);
+    const response = await api.get(`/api/v1/matches/${matchId}`);
     return response.data;
   },
 
   unmatch: async (matchId: number, reason?: string): Promise<void> => {
-    await api.post(`/matches/${matchId}/unmatch`, { reason });
+    await api.post(`/api/v1/matches/${matchId}/unmatch`, { reason });
   },
 
   getStats: async (): Promise<MatchStats> => {
-    const response = await api.get('/matches/stats/me');
+    const response = await api.get('/api/v1/matches/stats/me');
     return response.data;
   },
 };

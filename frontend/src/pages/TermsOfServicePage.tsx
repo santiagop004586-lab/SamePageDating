@@ -12,7 +12,7 @@ export default function TermsOfServicePage() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">1. Agreement to Terms</h2>
             <p className="text-gray-700 leading-relaxed">
-              By accessing or using FindBestRentals ("Service", "Platform", or "we"), you agree to be bound by these Terms of Service. 
+              By accessing or using SamePageDating ("Service", "Platform", or "we"), you agree to be bound by these Terms of Service. 
               If you do not agree to these terms, you may not access or use the Service.
             </p>
           </section>
@@ -20,9 +20,8 @@ export default function TermsOfServicePage() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">2. Description of Service</h2>
             <p className="text-gray-700 leading-relaxed">
-              FindBestRentals is a real estate investment analysis platform that provides data, calculations, and tools for 
-              analyzing Section 8 rental properties. The Service aggregates publicly available property listings and HUD Fair Market Rent 
-              data to help investors identify potential investment opportunities.
+              SamePageDating is a compatibility-first dating platform that uses a detailed questionnaire to match users based on their 
+              values, goals, and relationship preferences. The Service helps users find meaningful connections with compatible partners.
             </p>
             <p className="text-gray-700 leading-relaxed mt-4">
               <strong>Service Features Include:</strong>
@@ -156,7 +155,7 @@ export default function TermsOfServicePage() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">8. Intellectual Property</h2>
             <p className="text-gray-700 leading-relaxed">
-              The Service, including all content, features, and functionality, is owned by FindBestRentals and is protected by 
+              The Service, including all content, features, and functionality, is owned by SamePageDating and is protected by 
               copyright, trademark, and other intellectual property laws. You may not copy, modify, distribute, or create derivative 
               works based on the Service without our express written permission.
             </p>
@@ -165,7 +164,7 @@ export default function TermsOfServicePage() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">9. Limitation of Liability</h2>
             <p className="text-gray-700 leading-relaxed font-semibold">
-              TO THE MAXIMUM EXTENT PERMITTED BY LAW, FINDBESTRENTALS SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, 
+              TO THE MAXIMUM EXTENT PERMITTED BY LAW, SAMEPAGEDATING SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, 
               CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS OR REVENUES, WHETHER INCURRED DIRECTLY OR INDIRECTLY, 
               OR ANY LOSS OF DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM:
             </p>
@@ -196,7 +195,7 @@ export default function TermsOfServicePage() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">11. Indemnification</h2>
             <p className="text-gray-700 leading-relaxed">
-              You agree to indemnify, defend, and hold harmless FindBestRentals, its officers, directors, employees, and agents from 
+              You agree to indemnify, defend, and hold harmless SamePageDating, its officers, directors, employees, and agents from 
               any claims, damages, losses, liabilities, and expenses (including attorney fees) arising out of or relating to your use 
               of the Service, your violation of these Terms, or your violation of any rights of another party.
             </p>
@@ -247,14 +246,14 @@ export default function TermsOfServicePage() {
               If you have questions about these Terms, please contact us at:
             </p>
             <p className="text-gray-700 mt-4">
-              <strong>Email:</strong> support@findbestrentals.com<br />
-              <strong>Website:</strong> <a href="https://findbestrentals.com" className="text-blue-600 hover:underline">findbestrentals.com</a>
+              <strong>Email:</strong> support@samepagedating.com<br />
+              <strong>Website:</strong> <a href="https://samepagedating.com" className="text-blue-600 hover:underline">samepagedating.com</a>
             </p>
           </section>
 
           <div className="mt-12 pt-8 border-t border-gray-200">
             <p className="text-sm text-gray-600">
-              By using FindBestRentals, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.
+              By using SamePageDating, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.
             </p>
           </div>
         </div>

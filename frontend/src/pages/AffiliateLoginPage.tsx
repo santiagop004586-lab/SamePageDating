@@ -79,8 +79,8 @@ export default function AffiliateLoginPage() {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <button onClick={() => navigate('/affiliates')} className="flex items-center gap-2 mx-auto mb-4 text-green-700 hover:text-green-800 transition-colors">
-            <span className="text-3xl">🏘️</span>
-            <span className="font-bold text-lg">FindBestRentals</span>
+            <span className="text-3xl">💕</span>
+            <span className="font-bold text-lg">SamePageDating</span>
           </button>
           <h1 className="text-2xl font-bold text-gray-900">Affiliate Login</h1>
           <p className="text-gray-500 mt-1">Access your affiliate dashboard</p>

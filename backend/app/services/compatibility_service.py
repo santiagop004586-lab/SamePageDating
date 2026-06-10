@@ -34,9 +34,16 @@ class CompatibilityService:
             )
         ).first()
         
+        # Convert boolean answers to integers (database expects 0 or 1)
+        data_dict = answer_data.model_dump()
+        if data_dict.get('boolean_answer') is not None:
+            data_dict['boolean_answer'] = 1 if data_dict['boolean_answer'] else 0
+        if data_dict.get('preferred_boolean_answer') is not None:
+            data_dict['preferred_boolean_answer'] = 1 if data_dict['preferred_boolean_answer'] else 0
+        
         if existing:
             # Update existing answer
-            update_dict = answer_data.model_dump(exclude={'question_id'})
+            update_dict = {k: v for k, v in data_dict.items() if k != 'question_id'}
             for field, value in update_dict.items():
                 if value is not None:
                     setattr(existing, field, value)
@@ -48,7 +55,7 @@ class CompatibilityService:
             # Create new answer
             answer = CompatibilityAnswer(
                 profile_id=profile_id,
-                **answer_data.model_dump()
+                **data_dict
             )
             db.add(answer)
             db.commit()

@@ -464,8 +464,8 @@ export default function AdminPage() {
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <button onClick={() => navigate('/app')} className="flex items-center gap-2 text-gray-900 hover:text-indigo-700 transition-colors">
-              <span className="text-2xl">🏘️</span>
-              <span className="font-bold text-base">FindBestRentals</span>
+              <span className="text-2xl">💕</span>
+              <span className="font-bold text-base">SamePageDating</span>
             </button>
             <span className="text-xs bg-indigo-100 text-indigo-700 font-semibold px-2 py-0.5 rounded-full">Admin</span>
           </div>

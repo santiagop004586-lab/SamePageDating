@@ -12,9 +12,9 @@ class Settings(BaseSettings):
     # App Mode: controls signup gating, subscriptions, referrals, and landing page
     # Options: "waitlist", "active_beta", "production"
     #   waitlist:     Landing shows waitlist, invite required, subscription required, referrals visible
-    #   active_beta:  Landing shows waitlist, invite required, NO subscription (beta bypass), referrals hidden
-    #   production:   Landing shows free trial, no invite, subscription required, referrals visible
-    APP_MODE: str = "waitlist"
+    #   active_beta:  Landing shows signup, invite code required, NO subscription (beta bypass), referrals hidden
+    #   production:   Landing shows signup, no invite code, subscription required, referrals visible
+    APP_MODE: str = "active_beta"
     
     # Database
     DATABASE_URL: str
@@ -95,8 +95,8 @@ class Settings(BaseSettings):
 
     # Email (Resend)
     RESEND_API_KEY: str = ""
-    EMAILS_FROM: str = "noreply@send.findbestrentals.com"
-    EMAILS_FROM_NAME: str = "FindBestRentals"
+    EMAILS_FROM: str = "noreply@send.samepagedating.com"
+    EMAILS_FROM_NAME: str = "SamePageDating"
     FRONTEND_URL: str = "http://localhost:3000"
 
     # Investment Assumption Defaults (applied when ZIP-specific data is unavailable)
