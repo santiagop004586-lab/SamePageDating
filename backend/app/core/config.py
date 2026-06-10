@@ -1,7 +1,8 @@
 from pydantic_settings import BaseSettings
-from pydantic import model_validator
-from typing import List, Optional
+from pydantic import model_validator, field_validator
+from typing import List, Optional, Union
 import sys
+import json
 
 
 class Settings(BaseSettings):
@@ -23,7 +24,20 @@ class Settings(BaseSettings):
     REDIS_URL: str = "redis://localhost:6379/0"
     
     # CORS
-    CORS_ORIGINS: List[str] = ["http://localhost:3000"]
+    CORS_ORIGINS: Union[List[str], str] = ["http://localhost:3000"]
+    
+    @field_validator('CORS_ORIGINS', mode='before')
+    @classmethod
+    def parse_cors_origins(cls, v):
+        """Parse CORS_ORIGINS from comma-separated string or JSON array"""
+        if isinstance(v, str):
+            # Try parsing as JSON first
+            try:
+                return json.loads(v)
+            except json.JSONDecodeError:
+                # Fall back to comma-separated values
+                return [origin.strip() for origin in v.split(',') if origin.strip()]
+        return v
     
     # API Keys
     ATTOM_API_KEY: str = ""
