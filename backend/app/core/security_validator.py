@@ -67,6 +67,11 @@ class SecurityValidator:
         """Validate Stripe configuration"""
         errors = []
         
+        # Skip Stripe validation in active_beta mode (subscriptions are bypassed)
+        if settings.APP_MODE == "active_beta":
+            logger.info("Skipping Stripe validation (active_beta mode - subscriptions bypassed)")
+            return errors
+        
         # Ensure live keys are used in production
         if settings.STRIPE_SECRET_KEY:
             if not settings.STRIPE_SECRET_KEY.startswith("sk_live_"):
