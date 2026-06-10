@@ -30,7 +30,7 @@ class InviteCheckResponse(BaseModel):
 
 # ─── Endpoints ──────────────────────────────────────────────────────────────
 
-@router.post("/join", response_model=WaitlistJoinResponse, status_code=status.HTTP_201_CREATED)
+@router.post("/", response_model=WaitlistJoinResponse, status_code=status.HTTP_201_CREATED)
 def join_waitlist(body: WaitlistJoinRequest, db: Session = Depends(get_db)):
     """Add an email to the waitlist.  Idempotent — duplicate emails silently succeed."""
     existing = db.query(WaitlistUser).filter(
