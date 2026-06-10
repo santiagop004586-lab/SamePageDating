@@ -79,7 +79,7 @@ services:
       - CORS_ORIGINS=${CORS_ORIGINS}
       - FRONTEND_URL=${FRONTEND_URL}
     volumes:
-      - /root/sec_8_deal_finder/data:/data:ro
+      - /root/SamePageDating/data:/data:ro
     depends_on:
       postgres:
         condition: service_healthy
@@ -139,7 +139,7 @@ services:
       - "443:443"
     volumes:
       # Mount nginx config from host so we can update it without rebuilding the image
-      - /root/sec_8_deal_finder/frontend/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - /root/SamePageDating/frontend/nginx.conf:/etc/nginx/conf.d/default.conf:ro
       # Mount SSL certs (obtained via certbot on the host)
       - /etc/letsencrypt:/etc/letsencrypt:ro
       - /var/www/certbot:/var/www/certbot:ro
