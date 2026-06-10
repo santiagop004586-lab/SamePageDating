@@ -14,7 +14,7 @@ export default function WaitlistPage() {
     setLoading(true);
 
     try {
-      await api.post('/api/v1/waitlist', { email });
+      await api.post('/api/v1/waitlist/', { email });
       setSuccess(true);
     } catch (err: any) {
       setError(err?.response?.data?.detail || 'Failed to join waitlist. Please try again.');
